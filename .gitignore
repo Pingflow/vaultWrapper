@@ -1,0 +1,12 @@
+# IDE
+/.idea/
+
+# Project
+/vendor/
+.env
+config.yaml
+config.json
+
+## Tests
+coverage.out
+config.test.yaml
