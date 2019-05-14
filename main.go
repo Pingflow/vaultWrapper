@@ -57,7 +57,7 @@ func (v *Client) SaveAndReadSecret(path string, secret map[string]interface{}) (
 }
 
 func (v *Client) SaveSecret(path string, secret map[string]interface{}) error {
-	_, err := v.Logical().Write(v.getSecretPath(path), secret)
+	_, err := v.Logical().Write(path, secret)
 	if err != nil {
 		return err
 	}
@@ -66,7 +66,7 @@ func (v *Client) SaveSecret(path string, secret map[string]interface{}) error {
 }
 
 func (v *Client) DeleteSecret(path string) error {
-	_, err := v.Logical().Delete(v.getSecretPath(path))
+	_, err := v.Logical().Delete(path)
 	if err != nil {
 		return err
 	}
@@ -75,7 +75,7 @@ func (v *Client) DeleteSecret(path string) error {
 }
 
 func (v *Client) ReadSecret(path string) (map[string]interface{}, error) {
-	secret, err := v.Logical().Read(v.getSecretPath(path))
+	secret, err := v.Logical().Read(path)
 	if err != nil {
 		return nil, err
 	}
