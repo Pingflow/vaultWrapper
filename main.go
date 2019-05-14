@@ -32,6 +32,21 @@ func NewError(code int, err error) *Error {
 	return &Error{err: err, codeStatus: code}
 }
 
+// NewClient return a new client
+func NewClient(address, token string) (*Client, error) {
+	client, err := api.NewClient(&api.Config{Address: address})
+	if err != nil {
+		return nil, err
+	}
+
+	client.SetToken(token)
+
+	wrapperClient := &Client{Client: client}
+
+	return wrapperClient, nil
+
+}
+
 func (v *Client) SaveSecret(path string, secret map[string]interface{}) error {
 	_, err := v.Logical().Write(v.getSecretPath(path), secret)
 	if err != nil {
